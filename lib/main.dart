@@ -1,59 +1,92 @@
 import 'package:flutter/material.dart';
+import 'package:percent_indicator/percent_indicator.dart';
+import 'widgets.dart';
+import 'timer.dart';
+import 'package:scoped_model/scoped_model.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Productivity',
-      home: Scaffold(
+    return ScopedModel(
+        model: TimerModel(),
+        child: MaterialApp(
+          title: 'Pomodoro Timer',
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            primarySwatch: Colors.red,
+          ),
+          home: MyHomePage(title: 'Pomodoro Timer'),
+        ));
+  }
+}
+
+class MyHomePage extends StatelessWidget {
+  MyHomePage({Key key, this.title}) : super(key: key);
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size.width;
+    return ScopedModel(
+      model: TimerModel(),
+      child: Scaffold(
         appBar: AppBar(
-          title: Text('Rows & Columns'),
+          title: Text(title),
         ),
-        backgroundColor: Colors.indigo[100],
-        body: Home(),
-      ),
-    );
-  }
-}
-
-List<Widget> createSquares(int numSquares) {
-  int i = 0;
-  List colors = [
-    Colors.amber,
-    Colors.deepPurple,
-    Colors.deepOrange,
-    Colors.indigo,
-    Colors.lightBlue
-  ];
-  List<Widget> squares = List<Widget>();
-
-  while (i < numSquares) {
-    Container square = Container(
-      color: colors[i],
-      width: 60,
-      height: 60,
-      child: Text(i.toString()),
-    );
-    i++;
-    squares.add(square);
-  }
-  return squares;
-}
-
-class Home extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final sizeX = MediaQuery.of(context).size.width;
-    final sizeY = MediaQuery.of(context).size.height;
-    return Container(
-      width: sizeX,
-      height: sizeY,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: createSquares(5),
+        body: Center(
+          child: Column(
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  ScopedModelDescendant<TimerModel>(
+                      builder: (context, _, model) => TomatoButton(Colors.red,
+                          "Pomodoro", model.startPomodoro, size / 3.2)),
+                  ScopedModelDescendant<TimerModel>(
+                      builder: (context, _, model) => TomatoButton(
+                          Color(0xff8BC34A),
+                          'Short Break',
+                          model.startShort,
+                          size / 3.2)),
+                  ScopedModelDescendant<TimerModel>(
+                      builder: (context, _, model) => TomatoButton(
+                          Color(0xff689F38),
+                          'Long Break',
+                          model.startLong,
+                          size / 3.2)),
+                ],
+              ),
+              Expanded(
+                  child: ScopedModelDescendant<TimerModel>(
+                builder: (context, _, model) => CircularPercentIndicator(
+                  radius: 180.0,
+                  lineWidth: 10.0,
+                  percent: model.radius,
+                  center: Text(model.time,
+                      style: Theme.of(context).textTheme.display1),
+                  progressColor: Colors.green,
+                ),
+              )),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  ScopedModelDescendant<TimerModel>(
+                      builder: (context, _, model) => TomatoButton(
+                          Colors.red, "Stop", model.stopTimer, size / 2.1)),
+                  ScopedModelDescendant<TimerModel>(
+                      builder: (context, _, model) => TomatoButton(
+                          Color(0xff689F38),
+                          "Restart",
+                          model.restart,
+                          size / 2.1)),
+                ],
+              )
+            ],
+          ),
+        ),
       ),
     );
   }

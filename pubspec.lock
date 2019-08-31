@@ -15,6 +15,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.5.2"
+  assets_audio_player:
+    dependency: "direct main"
+    description:
+      name: assets_audio_player
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.1"
   async:
     dependency: transitive
     description:
@@ -57,18 +64,18 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.2"
-  cupertino_icons:
-    dependency: "direct main"
-    description:
-      name: cupertino_icons
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.2"
   flutter:
     dependency: "direct main"
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_launcher_icons:
+    dependency: "direct main"
+    description:
+      name: flutter_launcher_icons
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.7.2+1"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -109,6 +116,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.0+1"
+  percent_indicator:
+    dependency: "direct main"
+    description:
+      name: percent_indicator
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.16"
   petitparser:
     dependency: transitive
     description:
@@ -123,6 +137,27 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.5"
+  rxdart:
+    dependency: transitive
+    description:
+      name: rxdart
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.20.0"
+  scoped_model:
+    dependency: "direct main"
+    description:
+      name: scoped_model
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.1"
+  screen:
+    dependency: "direct main"
+    description:
+      name: screen
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.5"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -191,5 +226,12 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.5.0"
+  yaml:
+    dependency: transitive
+    description:
+      name: yaml
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.16"
 sdks:
   dart: ">=2.4.0 <3.0.0"
